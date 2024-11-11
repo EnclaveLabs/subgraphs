@@ -1,14 +1,3 @@
-import arbitrumDeployments from '@venusprotocol/isolated-pools/deployments/arbitrumone_addresses.json';
-import arbitrumSepoliaDeployments from '@venusprotocol/isolated-pools/deployments/arbitrumsepolia_addresses.json';
-import bscMainnetDeployments from '@venusprotocol/isolated-pools/deployments/bscmainnet_addresses.json';
-import chapelDeployments from '@venusprotocol/isolated-pools/deployments/bsctestnet_addresses.json';
-import ethereumDeployments from '@venusprotocol/isolated-pools/deployments/ethereum_addresses.json';
-import opBnbMainnetDeployments from '@venusprotocol/isolated-pools/deployments/opbnbmainnet_addresses.json';
-import optimismDeployments from '@venusprotocol/isolated-pools/deployments/opmainnet_addresses.json';
-import optimismSepoliaDeployments from '@venusprotocol/isolated-pools/deployments/opsepolia_addresses.json';
-import sepoliaDeployments from '@venusprotocol/isolated-pools/deployments/sepolia_addresses.json';
-import zksyncDeployments from '@venusprotocol/isolated-pools/deployments/zksyncmainnet_addresses.json';
-import zksyncSepoliaDeployments from '@venusprotocol/isolated-pools/deployments/zksyncsepolia_addresses.json';
 import fs from 'fs';
 import Mustache from 'mustache';
 
@@ -27,8 +16,8 @@ export const getNetwork = () => {
     'optimismSepolia',
     'optimism',
   ] as const;
-  const network = process.env.NETWORK;
-  // @ts-expect-error network env var is unknown here
+  const network = 'arbitrum'; //TOFIX should come from env
+
   if (!supportedNetworks.includes(network)) {
     throw new Error(`NETWORK env var must be set to one of ${supportedNetworks}`);
   }
@@ -38,65 +27,10 @@ export const getNetwork = () => {
 const main = () => {
   const network = getNetwork();
   const config = {
-    docker: {
-      network: 'hardhat',
-      poolRegistryAddress: '0x3155755b79aA083bd953911C92705B7aA82a18F9',
-      startBlock: 0,
-    },
-    ethereum: {
-      network: 'mainnet',
-      poolRegistryAddress: ethereumDeployments.addresses.PoolRegistry,
-      startBlock: '18968000',
-    },
-    sepolia: {
-      network: 'sepolia',
-      poolRegistryAddress: sepoliaDeployments.addresses.PoolRegistry,
-      startBlock: '3930059',
-    },
-    chapel: {
-      network: 'chapel',
-      poolRegistryAddress: chapelDeployments.addresses.PoolRegistry,
-      startBlock: '30870000',
-    },
-    bsc: {
-      network: 'bsc',
-      poolRegistryAddress: bscMainnetDeployments.addresses.PoolRegistry,
-      startBlock: '29300000',
-    },
-    opbnbMainnet: {
-      network: 'opbnb-mainnet',
-      poolRegistryAddress: opBnbMainnetDeployments.addresses.PoolRegistry,
-      startBlock: '16232873',
-    },
-    arbitrumSepolia: {
-      network: 'arbitrum-sepolia',
-      poolRegistryAddress: arbitrumSepoliaDeployments.addresses.PoolRegistry,
-      startBlock: '44214769',
-    },
     arbitrum: {
       network: 'arbitrum-one',
-      poolRegistryAddress: arbitrumDeployments.addresses.PoolRegistry,
-      startBlock: '216184381',
-    },
-    zksyncSepolia: {
-      network: 'zksync-era-sepolia',
-      poolRegistryAddress: zksyncSepoliaDeployments.addresses.PoolRegistry,
-      startBlock: '3535723',
-    },
-    zksync: {
-      network: 'zksync-era',
-      poolRegistryAddress: zksyncDeployments.addresses.PoolRegistry,
-      startBlock: '43555102',
-    },
-    optimismSepolia: {
-      network: 'optimism-sepolia',
-      poolRegistryAddress: optimismSepoliaDeployments.addresses.PoolRegistry,
-      startBlock: '17040271',
-    },
-    optimism: {
-      network: 'optimism',
-      poolRegistryAddress: optimismDeployments.addresses.PoolRegistry,
-      startBlock: '126048098',
+      poolRegistryAddress: '0x382238f07Bc4Fe4aA99e561adE8A4164b5f815DA',
+      startBlock: '271252039',
     },
   };
 
